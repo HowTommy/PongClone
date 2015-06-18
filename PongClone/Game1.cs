@@ -13,6 +13,7 @@ namespace PongClone
         SpriteBatch spriteBatch;
 
         private Paddle paddle;
+        private Ball ball;
 
         public Game1()
         {
@@ -43,8 +44,8 @@ namespace PongClone
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             paddle = new Paddle(Content.Load<Texture2D>("paddle"), Vector2.Zero, Window.ClientBounds);
-
-            // TODO: use this.Content to load your game content here
+            ball = new Ball(Content.Load<Texture2D>("ball"), Vector2.Zero);
+            ball.AttachTo(paddle);
         }
 
         /// <summary>
@@ -67,6 +68,7 @@ namespace PongClone
                 Exit();
 
             paddle.Update(gameTime);
+            ball.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -82,6 +84,7 @@ namespace PongClone
             spriteBatch.Begin();
 
             paddle.Draw(spriteBatch);
+            ball.Draw(spriteBatch);
 
             spriteBatch.End();
 

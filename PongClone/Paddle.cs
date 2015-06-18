@@ -22,15 +22,15 @@ namespace PongClone
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
-                _velocity = new Vector2(0, -5f);
+                Velocity = new Vector2(0, -5f);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                _velocity = new Vector2(0, 5f);
+                Velocity = new Vector2(0, 5f);
             }
             else
             {
-                _velocity = new Vector2(0, 0);
+                Velocity = new Vector2(0, 0);
             }
 
             base.Update(gameTime);
@@ -38,7 +38,7 @@ namespace PongClone
 
         protected override void CheckBounds()
         {
-            _location.Y = MathHelper.Clamp(_location.Y, 0, _screenBounds.Height - _texture.Height);
+            Location.Y = MathHelper.Clamp(Location.Y, 0, _screenBounds.Height - _texture.Height);
         }
     }
 }
