@@ -12,8 +12,7 @@ namespace PongClone
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Paddle paddle;
-        private Ball ball;
+        private GameObjects _gameObjects;
 
         public Game1()
         {
@@ -43,9 +42,22 @@ namespace PongClone
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            paddle = new Paddle(Content.Load<Texture2D>("paddle"), Vector2.Zero, Window.ClientBounds);
-            ball = new Ball(Content.Load<Texture2D>("ball"), Vector2.Zero);
-            ball.AttachTo(paddle);
+            _gameObjects = new GameObjects();
+
+            var gameBounderies = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+
+            var paddleTexture = Content.Load<Texture2D>("paddle");
+
+            _gameObjects.PlayerPaddle = new HumanPaddle(paddleTexture, Vector2.Zero, gameBounderies);
+
+            var computerPaddleLocation = new Vector2(gameBounderies.Width - paddleTexture.Width, 0);
+
+            _gameObjects.ComputerPaddle = new ComputerPaddle(paddleTexture, computerPaddleLocation, gameBounderies, Difficulty.Insane);
+
+            _gameObjects.Ball = new Ball(Content.Load<Texture2D>("ball"), Vector2.Zero, gameBounderies);
+            _gameObjects.Ball.AttachTo(_gameObjects.PlayerPaddle);
+
+            _gameObjects.Score = new Score(Content.Load<SpriteFont>("testfont"), gameBounderies);
         }
 
         /// <summary>
@@ -67,8 +79,10 @@ namespace PongClone
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            paddle.Update(gameTime);
-            ball.Update(gameTime);
+            _gameObjects.PlayerPaddle.Update(gameTime, _gameObjects);
+            _gameObjects.ComputerPaddle.Update(gameTime, _gameObjects);
+            _gameObjects.Ball.Update(gameTime, _gameObjects);
+            _gameObjects.Score.Update(gameTime, _gameObjects);
 
             base.Update(gameTime);
         }
@@ -83,8 +97,10 @@ namespace PongClone
 
             spriteBatch.Begin();
 
-            paddle.Draw(spriteBatch);
-            ball.Draw(spriteBatch);
+            _gameObjects.PlayerPaddle.Draw(spriteBatch);
+            _gameObjects.ComputerPaddle.Draw(spriteBatch);
+            _gameObjects.Ball.Draw(spriteBatch);
+            _gameObjects.Score.Draw(spriteBatch);
 
             spriteBatch.End();
 

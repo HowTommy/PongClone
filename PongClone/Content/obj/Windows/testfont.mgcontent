@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/Git/PongClone/PongClone/Content/testfont.spritefont</SourceFile>
+  <SourceTime>2015-06-20T00:46:21.551582+02:00</SourceTime>
+  <DestFile>D:/Git/PongClone/PongClone/Content/bin/Windows/testfont.xnb</DestFile>
+  <DestTime>2015-06-20T00:46:28.3669718+02:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2015-04-29T19:14:44+02:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2015-04-29T19:14:44+02:00</ProcessorTime>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
